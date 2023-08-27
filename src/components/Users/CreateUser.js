@@ -1,5 +1,6 @@
 import Card from '../UI/Card'
 import Button from '../UI/Button'
+import Modal from '../UI/Modal'
 import styles from './CreateUser.module.css'
 import { useState } from 'react'
 
@@ -18,9 +19,13 @@ const CreateUser = (props) => {
   const ageChangeHandler = (event) => {
     setAge(event.target.value)
   }
+  const renderModal = () => {
+    return <Modal title="Incorrect input" description="Input can't be empty" />
+  }
 
   return (
     <Card className={styles.input}>
+      {renderModal()}
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor="name">Name</label>
