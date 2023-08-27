@@ -8,10 +8,26 @@ const CreateUser = (props) => {
   const { onUserCreate } = props
   const [name, setName] = useState('')
   const [age, setAge] = useState('')
+  const [modalTitle, setModalTitle] = useState('')
+  const [modalDescription, setModalDescription] = useState('')
+  const [modalShown, setModalShown] = useState(false)
   const submitHandler = (event) => {
     event.preventDefault()
-    const user = { name, age }
-    onUserCreate(user)
+
+    if (!name || !age) {
+      setModalTitle('Incorrect input')
+      setModalDescription("Inputs can't be empty")
+      setModalShown(true)
+    } else if (Number(age) < 1) {
+      setModalTitle('Incorrect age')
+      setModalDescription('Age must be more than 0')
+      setModalShown(true)
+    } else {
+      const user = { name, age }
+      onUserCreate(user)
+      setName('')
+      setAge('')
+    }
   }
   const nameChangeHandler = (event) => {
     setName(event.target.value)
@@ -19,8 +35,13 @@ const CreateUser = (props) => {
   const ageChangeHandler = (event) => {
     setAge(event.target.value)
   }
+  const closeModalHandler = () => {
+    setModalShown(false)
+  }
   const renderModal = () => {
-    return <Modal title="Incorrect input" description="Input can't be empty" />
+    if (modalShown) {
+      return <Modal title={modalTitle} description={modalDescription} onClose={closeModalHandler} />
+    }
   }
 
   return (
@@ -33,7 +54,7 @@ const CreateUser = (props) => {
         </div>
         <div>
           <label htmlFor="age">Age</label>
-          <input type="number" id="age" min="1" onChange={ageChangeHandler} value={age} />
+          <input type="number" id="age" onChange={ageChangeHandler} value={age} />
         </div>
         <Button type="submit">Create</Button>
       </form>

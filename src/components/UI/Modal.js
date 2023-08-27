@@ -3,7 +3,7 @@ import Card from './Card'
 import Button from './Button'
 
 const Modal = (props) => {
-  const { title, description } = props
+  const { title, description, onClose } = props
 
   return (
     <div>
@@ -16,7 +16,7 @@ const Modal = (props) => {
           <p>{description}</p>
         </div>
         <footer className={styles.actions}>
-          <Button>Close</Button>
+          <Button onClick={onClose}>Close</Button>
         </footer>
       </Card>
     </div>
