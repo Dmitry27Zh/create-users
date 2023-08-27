@@ -4,19 +4,24 @@ import UsersList from './components/Users/UsersList'
 import { createRandomGenerator } from './components/Utils/utils'
 
 const getRandomId = createRandomGenerator(5)
+const createUser = (name, age) => {
+  return {
+    name,
+    age,
+    _id: getRandomId(),
+  }
+}
 
 const App = () => {
-  const [users, setUsers] = useState([
-    {
-      name: 'John',
-      age: 3,
-      _id: getRandomId(),
-    },
-  ])
+  const [users, setUsers] = useState([createUser('John', 4)])
+  const addUser = ({ name, age }) => {
+    const user = createUser(name, age)
+    setUsers((prevState) => [user, ...prevState])
+  }
 
   return (
     <div>
-      <CreateUser />
+      <CreateUser onUserCreate={addUser} />
       <UsersList users={users} />
     </div>
   )
