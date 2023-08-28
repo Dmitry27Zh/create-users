@@ -14,7 +14,7 @@ const CreateUser = (props) => {
   const submitHandler = (event) => {
     event.preventDefault()
 
-    if (!name || !age) {
+    if (name.trim().length === 0 || !age.trim().length === 0) {
       setModalTitle('Incorrect input')
       setModalDescription("Inputs can't be empty")
       setModalShown(true)
