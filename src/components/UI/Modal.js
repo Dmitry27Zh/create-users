@@ -6,7 +6,7 @@ const Modal = (props) => {
   const { title, description, onClose } = props
 
   return (
-    <div>
+    <>
       <div className={styles.backdrop}></div>
       <Card className={styles.modal}>
         <header className={styles.header}>
@@ -19,7 +19,7 @@ const Modal = (props) => {
           <Button onClick={onClose}>Close</Button>
         </footer>
       </Card>
-    </div>
+    </>
   )
 }
 
