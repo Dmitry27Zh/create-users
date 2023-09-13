@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import CreateUser from './components/Users/CreateUser'
 import UsersList from './components/Users/UsersList'
 import { createRandomGenerator } from './components/Utils/utils'
@@ -20,10 +20,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <CreateUser onUserCreate={addUser} />
       <UsersList users={users} />
-    </div>
+    </React.Fragment>
   )
 }
 

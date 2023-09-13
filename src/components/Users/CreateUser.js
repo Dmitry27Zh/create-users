@@ -1,6 +1,6 @@
 import Card from '../UI/Card'
 import Button from '../UI/Button'
-import Modal from '../UI/Modal'
+import ErrorModal from '../UI/ErrorModal'
 import styles from './CreateUser.module.css'
 import { useState } from 'react'
 
@@ -42,7 +42,7 @@ const CreateUser = (props) => {
     if (modal) {
       const { title, description } = modal
 
-      return <Modal title={title} description={description} onClose={closeModalHandler} />
+      return <ErrorModal title={title} description={description} onClose={closeModalHandler} />
     }
   }
 
