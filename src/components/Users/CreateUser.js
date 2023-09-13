@@ -2,15 +2,19 @@ import Card from '../UI/Card'
 import Button from '../UI/Button'
 import ErrorModal from '../UI/ErrorModal'
 import styles from './CreateUser.module.css'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 const CreateUser = (props) => {
   const { onUserCreate } = props
   const [name, setName] = useState('')
   const [age, setAge] = useState('')
   const [modal, setModal] = useState(null)
+  const nameInputRef = useRef()
+  const ageInputRef = useRef()
   const submitHandler = (event) => {
     event.preventDefault()
+    const name = nameInputRef.current.value
+    const age = ageInputRef.current.value
 
     if (name.trim().length === 0 || age.trim().length === 0) {
       setModal({
@@ -52,11 +56,11 @@ const CreateUser = (props) => {
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" onChange={nameChangeHandler} value={name} />
+          <input type="text" id="name" onChange={nameChangeHandler} value={name} ref={nameInputRef} />
         </div>
         <div>
           <label htmlFor="age">Age</label>
-          <input type="number" id="age" onChange={ageChangeHandler} value={age} />
+          <input type="number" id="age" onChange={ageChangeHandler} value={age} ref={ageInputRef} />
         </div>
         <Button type="submit">Create</Button>
       </form>
